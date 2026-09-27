@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>CRM Dashboard</h1>
+<p class="muted">Customer relationships, orders and shop activity in one place.</p>
+<div class="cards">
+  <div class="card"><span>Customers</span><strong>{{ stats.customers }}</strong></div>
+  <div class="card"><span>Orders</span><strong>{{ stats.orders }}</strong></div>
+  <div class="card"><span>Total Sales</span><strong>₹{{ "%.2f"|format(stats.sales) }}</strong></div>
+  <div class="card"><span>Feedback</span><strong>{{ stats.feedback }}</strong></div>
+</div>
+<section class="panel">
+<h2>Recent Orders</h2>
+<table><tr><th>ID</th><th>Customer</th><th>Product</th><th>Qty</th><th>Total</th><th>Status</th></tr>
+{% for o in recent %}
+<tr><td>#{{o.id}}</td><td>{{o.customer or 'Walk-in'}}</td><td>{{o.product}}</td><td>{{o.quantity}}</td><td>₹{{"%.2f"|format(o.total)}}</td><td>{{o.status}}</td></tr>
+{% else %}<tr><td colspan="6">No orders yet.</td></tr>{% endfor %}
+</table>
+</section>
+{% endblock %}

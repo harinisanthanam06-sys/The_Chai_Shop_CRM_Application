@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>CRM Reports</h1>
+<div class="panel"><h2>Popular Products</h2>
+<table><tr><th>Product</th><th>Quantity Sold</th><th>Sales</th></tr>
+{% for p in popular %}<tr><td>{{p.name}}</td><td>{{p.quantity}}</td><td>₹{{"%.2f"|format(p.sales)}}</td></tr>
+{% else %}<tr><td colspan="3">No sales data yet.</td></tr>{% endfor %}</table></div>
+<div class="panel"><h2>Top Customers by Spending</h2>
+<table><tr><th>Customer</th><th>Orders</th><th>Spent</th></tr>
+{% for c in top_customers %}<tr><td>{{c.name}}</td><td>{{c.orders}}</td><td>₹{{"%.2f"|format(c.spent)}}</td></tr>{% else %}<tr><td colspan="3">No customer data yet.</td></tr>{% endfor %}</table></div>
+{% endblock %}

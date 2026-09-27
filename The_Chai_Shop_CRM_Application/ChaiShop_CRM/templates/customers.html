@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Customer Management</h1>
+<div class="panel">
+<h2>Add Customer</h2>
+<form method="post" action="{{ url_for('add_customer') }}" class="formgrid">
+<input name="name" placeholder="Customer name" required>
+<input name="phone" placeholder="Phone">
+<input name="email" type="email" placeholder="Email">
+<button>Add Customer</button>
+</form>
+</div>
+<div class="panel"><h2>Customers</h2>
+<table><tr><th>Name</th><th>Phone</th><th>Email</th><th>Loyalty Points</th></tr>
+{% for c in customers %}<tr><td>{{c.name}}</td><td>{{c.phone}}</td><td>{{c.email}}</td><td>{{c.points}}</td></tr>
+{% else %}<tr><td colspan="4">No customers added.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

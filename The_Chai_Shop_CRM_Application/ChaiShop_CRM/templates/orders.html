@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Order Management</h1>
+<div class="panel">
+<h2>New Order</h2>
+<form method="post" action="{{ url_for('add_order') }}" class="formgrid">
+<select name="customer_id"><option value="">Walk-in customer</option>{% for c in customers %}<option value="{{c.id}}">{{c.name}}</option>{% endfor %}</select>
+<select name="product_id" required>{% for p in products %}<option value="{{p.id}}">{{p.name}} — ₹{{p.price}}</option>{% endfor %}</select>
+<input name="quantity" type="number" min="1" value="1" required>
+<button>Place Order</button>
+</form>
+</div>
+<div class="panel"><h2>Orders</h2>
+<table><tr><th>ID</th><th>Customer</th><th>Product</th><th>Qty</th><th>Total</th><th>Status</th></tr>
+{% for o in orders %}<tr><td>#{{o.id}}</td><td>{{o.customer or 'Walk-in'}}</td><td>{{o.product}}</td><td>{{o.quantity}}</td><td>₹{{"%.2f"|format(o.total)}}</td><td>{{o.status}}</td></tr>
+{% else %}<tr><td colspan="6">No orders yet.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

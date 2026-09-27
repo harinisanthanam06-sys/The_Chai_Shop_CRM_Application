@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Customer Feedback</h1>
+<div class="panel">
+<form method="post" action="{{ url_for('add_feedback') }}" class="formgrid">
+<select name="customer_id"><option value="">Anonymous</option>{% for c in customers %}<option value="{{c.id}}">{{c.name}}</option>{% endfor %}</select>
+<select name="rating" required><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Average</option><option value="2">2 - Poor</option><option value="1">1 - Very Poor</option></select>
+<input name="message" placeholder="Feedback / suggestion" required>
+<button>Submit Feedback</button>
+</form>
+</div>
+<div class="panel"><table><tr><th>Customer</th><th>Rating</th><th>Message</th><th>Date</th></tr>
+{% for f in feedback %}<tr><td>{{f.customer or 'Anonymous'}}</td><td>{{f.rating}}/5</td><td>{{f.message}}</td><td>{{f.created_at}}</td></tr>
+{% else %}<tr><td colspan="4">No feedback yet.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

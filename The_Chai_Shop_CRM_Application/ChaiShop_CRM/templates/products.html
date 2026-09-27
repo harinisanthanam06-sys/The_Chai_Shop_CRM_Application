@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Menu / Products</h1>
+<div class="grid">
+{% for p in products %}
+<div class="product"><h3>{{p.name}}</h3><span>{{p.category}}</span><strong>₹{{"%.2f"|format(p.price)}}</strong><small>{{"Available" if p.available else "Unavailable"}}</small></div>
+{% endfor %}
+</div>
+{% endblock %}
